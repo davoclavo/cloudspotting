@@ -1,4 +1,5 @@
-cloudspotting
+[Cloudspotting](http://cloudspotting.co)
 =============
+![Claudio](http://d.pr/i/VPe3+)
 
-Find stuff on the clouds, on the cloud.
+Shape your cloud.
