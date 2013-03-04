@@ -42,7 +42,7 @@ cloudspotting = {
         sketch.exporter.canvas.height = sketch.canvas.height;
         sketch.thickness = 2;
         sketch.snapshots = [];
-
+        sketch.loadPalette();
         // Avoid cursor changing
         $(sketch.canvas).mousedown(function(event){
             event.preventDefault();
@@ -71,7 +71,6 @@ cloudspotting = {
 
           sketch.lineCap = 'round';
           sketch.lineJoin = 'round';
-          sketch.fillStyle = sketch.strokeStyle = COLORS[ i % COLORS.length ];
           sketch.lineWidth = radius;
 
           sketch.beginPath();
@@ -83,21 +82,20 @@ cloudspotting = {
 
       sketch.save = function() {
         var w = sketch.canvas.width,
-            h = sketch.canvas.height,
-            offsetX = 0,
-            offsetY = (sketch.background.image.height - sketch.canvas.height)/2;
+            h = sketch.canvas.height;
 
-        sketch.exporter.drawImage(
-          sketch.background.ctx.canvas,
-          offsetX,
-          offsetY,
-          sketch.background.ctx.canvas.width,
-          sketch.background.ctx.canvas.height,
-          offsetX,
-          offsetY,
-          sketch.exporter.canvas.width,
-          sketch.exporter.canvas.height
-        );
+        sketch.exporter.drawImage(sketch.background.ctx.canvas, 0, 0);
+        sketch.exporter.drawImage(sketch.canvas, 0, 0);
+
+        var datauri = sketch.exporter.canvas.toDataURL();
+
+        var link = document.createElement('a');
+        link.target = '_blank';
+        link.click();
+        link.href = datauri;
+        link.click();
+
+
       };
 
       sketch.mouseup = function(){
@@ -148,6 +146,21 @@ cloudspotting = {
             sketch.background.ctx.drawImage(bg, offsetX, offsetY, side, side, 0, 0, sketch.canvas.width, sketch.canvas.height);
           }
         });
+
+        sketch.loadPalette = function(){
+          sketch.fillStyle = sketch.strokeStyle = COLORS[0];
+          $('#palette .color').each(function(index, element){
+            element.style.color = COLORS[index];
+            $(element).data('color', COLORS[index]);
+          });
+
+          $('.color').click(function(eve){
+            console.log('asdfsadf')
+            console.log($(this).data('color'));
+            sketch.fillStyle = sketch.strokeStyle = $(this).data('color');
+            eve.preventDefault();
+          });
+        };
 
         sketch.showSpinner = function() {
         };
