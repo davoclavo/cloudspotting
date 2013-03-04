@@ -43,6 +43,9 @@ cloudspotting = {
         sketch.thickness = 2;
         sketch.snapshots = [];
         sketch.loadPalette();
+
+        // Just draw when the mouse is pressed
+        sketch.drawing = false;
         // Avoid cursor changing
         $(sketch.canvas).mousedown(function(event){
             event.preventDefault();
@@ -61,13 +64,9 @@ cloudspotting = {
         if ( sketch.keys.C ) sketch.clear();
       };
 
-      // Mouse & touch events are merged, so handling touch events by default
-      // and powering sketches using the touches array is recommended for easy
-      // scalability. If you only need to handle the mouse / desktop browsers,
-      // use the 0th touch element and you get wider device support for free.
       sketch.touchmove = function( e ) {
-        for ( var i = sketch.touches.length - 1, touch; i >= 0; i-- ) {
-          touch = sketch.touches[i];
+        if(sketch.drawing){
+          touch = sketch.touches[0]; // for... i to use multitouch
 
           sketch.lineCap = 'round';
           sketch.lineJoin = 'round';
@@ -94,11 +93,15 @@ cloudspotting = {
         link.click();
         link.href = datauri;
         link.click();
+      };
 
-
+      sketch.mousedown = function(){
+        sketch.drawing = true;
+        $('#status').text('mousedown');
       };
 
       sketch.mouseup = function(){
+        sketch.drawing = false;
         // Push snapshot
         sketch.snapshots.push(sketch.canvas.toDataURL());
         if(sketch.snapshots.length > 10) {
@@ -155,8 +158,7 @@ cloudspotting = {
           });
 
           $('.color').click(function(eve){
-            console.log('asdfsadf')
-            console.log($(this).data('color'));
+            console.log('Color changed to: ' + $(this).data('color'));
             sketch.fillStyle = sketch.strokeStyle = $(this).data('color');
             eve.preventDefault();
           });
@@ -176,10 +178,6 @@ cloudspotting = {
         $('#status').text('mouseover');
       };
 
-      sketch.mousedown = function(){
-        $('#status').text('mousedown');
-      };
-
       sketch.mousemove = function(){
         $('#status').text('mousemove');
       };
@@ -189,19 +187,52 @@ cloudspotting = {
       };
 
       sketch.draw = function(){
-      }
-
-
+      };
 
       // sketch.click = function(){
       //   $('#status').text('click');
       // };
-      // 
-
-
+      //
 
       sketch.start();
+
+      var upload = document.getElementById('cloud-input');
+
+      if(typeof window.FileReader === 'undefined') {
+        console.error('fail - cant preview your image. Use a decent browser plz');
+      } else {
+        console.log('houston: file api successful');
+      }
+       
+      upload.onchange = function (e) {
+        e.preventDefault();
+
+        var file = upload.files[0],
+            reader = new FileReader();
+        reader.onload = function (event) {
+          // event.target.result = src
+          sketch.setBackground(event.target.result);
+        };
+        reader.readAsDataURL(file);
+        return false;
+      };
+
+      sketch.canvas.ondragover = function () { this.className = 'hover'; return false; };
+      sketch.canvas.ondragend = function () { this.className = ''; return false; };
+      sketch.canvas.ondrop = function (e) {
+        e.preventDefault();
+
+        var file = e.dataTransfer.files[0],
+            reader = new FileReader();
+        reader.onload = function (event) {
+          sketch.setBackground(event.target.result);
+        };
+        reader.readAsDataURL(file);
+
+        return false;
+      };
     });
+  
   }
 };
 module.exports = cloudspotting;
