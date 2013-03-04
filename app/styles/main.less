@@ -1,21 +1,30 @@
+@import "_variables.less";
+@import "_mixins.less";
+@side: 400px;
 #background-container{
   overflow: hidden;
 }
 
+
 #background-canvas {
   position: absolute;
-  z-index: 0;
-  width: 100%;
+  z-index: -1;
+  width: @side;
+  height: @side;
+  border: 1px solid red;
+
 }
 
 #sketch-container {
-  
+  width: @side;
   .sketch {
+    cursor: url(/images/cursor.png) 30 30, crosshair;
+    .user-select(none);
+    z-index: 2;
+    border: 1px solid green;
 
   }
 }
-
-
 
 canvas#export-sketch {
   // display: none;
