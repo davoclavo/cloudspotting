@@ -1,31 +1,41 @@
-<header>
-  <div class="container">
-    <h1>Cloudspotting</h1>
-  </div>
+<header class="bar-title">
+  {{! <a class="button" href="#">&#10005;</a> }}
+  <a class="button" href="#" id="shuffle"><i class="icon-cloud"></i></a>
+  <h1 class="title">Cloudspotting</h1>
+  <a class="button" href="#" id="camera">
+    <i class="icon-camera"></i>
+  </a>
+  <a class="button disabled" href="#" id="share">
+    <i class="icon-twitter"></i>
+  </a>
 </header>
 
-<span id="status"></span>
-<div class="container">
+<div class="content">
+  <form id="zap">
+    <input type="text" placeholder="What do you see?" id="name">
+    <input type="file" id="cloud-input" accept="image/gif, image/jpeg, image/png">
+  </form>
+
   <div id="sketch-container">
     <div id="canvas-container">
       <canvas id="background-canvas"></canvas>
     </div>
     <canvas id="export-canvas"></canvas>
+  </div>
 
-    <div class="btn-toolbar" id="palette">
-      <div class="btn-group">
-        <button class="btn" href="#"><i class="icon-tint color"></i></button>
-        <button class="btn" href="#"><i class="icon-tint color"></i></button>
-        <button class="btn" href="#"><i class="icon-tint color"></i></button>
-        <button class="btn" href="#"><i class="icon-tint color"></i></button>
-        <button class="btn" href="#"><i class="icon-tint color"></i></button>
-        <button class="btn" href="#"><i class="icon-tint color"></i></button>
-        <button class="btn" href="#"><i class="icon-tint color"></i></button>
-        <button class="btn" href="#"><i class="icon-tint color"></i></button>
-        <button class="btn" href="#"><i class="icon-tint color"></i></button>
-      </div>
-    </div>
-    <input type="file" id="cloud-input" accept="image/gif, image/jpeg, image/png">
+  <div class="content-padded">
+      {{! <span id="status">Status</span> }}
+
+      <ul class="segmented-controller" id="palette">
+        <li class="active color"><a href="#"><i class="icon-tint"></i></a></li>
+        <li class="color"><a href="#"><i class="icon-tint"></i></a></li>
+        <li class="color"><a href="#"><i class="icon-tint"></i></a></li>
+        <li class="color"><a href="#"><i class="icon-tint"></i></a></li>
+        <li class="color"><a href="#"><i class="icon-tint"></i></a></li>
+        <li class="color"><a href="#"><i class="icon-tint"></i></a></li>
+        <li class="color"><a href="#"><i class="icon-tint"></i></a></li>
+        <li class="color"><a href="#"><i class="icon-tint"></i></a></li>
+        <li class="color"><a href="#"><i class="icon-tint"></i></a></li>
+      </ul>
   </div>
 </div>
-

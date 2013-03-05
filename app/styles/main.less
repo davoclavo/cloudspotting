@@ -1,6 +1,6 @@
 @import "_variables.less";
 @import "_mixins.less";
-@side: 400px;
+@side: 100%;
 #background-container{
   overflow: hidden;
 }
@@ -9,23 +9,68 @@
 #background-canvas {
   position: absolute;
   z-index: -1;
-  width: @side;
-  height: @side;
-  border: 1px solid red;
+  // border: 1px solid red;
+  
+  .box-sizing(box-sizing)
 
 }
 
 #sketch-container {
   width: @side;
+  // max-width: 600px;
   .sketch {
-    cursor: url(/images/cursor.png) 30 30, crosshair;
+    cursor: url(images/cursor.png) 30 30, crosshair;
     .user-select(none);
     z-index: 2;
-    border: 1px solid green;
-
+    // border: 1px solid green;
+    .box-sizing(box-sizing)
   }
+}
+
+i {
+  font-size: 19px;
+}
+
+.active a {
+text-shadow: 
+  -1px -1px 0 #FFF,
+   1px -1px 0 #FFF,
+   -1px 1px 0 #FFF,
+    1px 1px 0 #FFF;
 }
 
 #export-canvas {
   display: none;
+}
+
+.segmented-controller li > a {
+  padding: 8px 10px;
+}
+
+#camera {
+  position: absolute;
+  top: 5px;
+  right: 56px;
+}
+
+#cloud-input {
+  position: absolute;
+  width: 0;
+}
+
+input.error {
+  background-color: rgb(185, 74, 72);
+  border-color: rgb(185, 74, 72);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.twitter-share-button{
+  position: absolute;
+
+}
+
+#name {
+  margin-bottom:0;
 }

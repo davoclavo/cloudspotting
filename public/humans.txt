@@ -1,0 +1,17 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Davo Gu -- Web Dev -- @davoclavo
+    Lulito Mix -- Design  -- @lulomx
+
+# THANKS
+
+    Fabiantxt
+
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, LESS
+    Normalize.css, jQuery, Modernizr, sketch.js
