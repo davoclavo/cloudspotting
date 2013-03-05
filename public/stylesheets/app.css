@@ -2363,7 +2363,7 @@ select {
   width: 100%;
 }
 #sketch-container .sketch {
-  cursor: url(images/cursor.png) 30 30, crosshair;
+  cursor: url(../images/cursor.png) 30 30, crosshair;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
